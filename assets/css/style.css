@@ -13,6 +13,22 @@
   --radius: 18px;
 }
 
+@keyframes gradientDrift{
+  0%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+@keyframes floatUp{
+  0%{ transform: translateY(0px); }
+  50%{ transform: translateY(-6px); }
+  100%{ transform: translateY(0px); }
+}
+@keyframes pulseGlow{
+  0%{ box-shadow: 0 0 0 0 rgba(14,165,233,.28); }
+  70%{ box-shadow: 0 0 0 14px rgba(14,165,233,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(14,165,233,0); }
+}
+
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 body{
@@ -106,7 +122,9 @@ a{ color:inherit; text-decoration:none; }
   position:absolute;
   inset:0;
   background: linear-gradient(135deg, rgba(14,165,233,.18), rgba(124,58,237,.12));
-  opacity:.4;
+  opacity:.45;
+  background-size: 180% 180%;
+  animation: gradientDrift 18s ease-in-out infinite;
   pointer-events:none;
 }
 .hero .container{ position: relative; z-index: 1; }
@@ -221,6 +239,7 @@ a{ color:inherit; text-decoration:none; }
   box-shadow: 0 14px 30px rgba(13,27,53,.06);
   position: relative;
   overflow: hidden;
+  animation: floatUp 6s ease-in-out infinite;
 }
 .stat::after{
   content:"";
@@ -306,6 +325,7 @@ a{ color:inherit; text-decoration:none; }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow:hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 .cardBody{ padding: 16px; }
 .badge{
@@ -344,6 +364,7 @@ a{ color:inherit; text-decoration:none; }
   background: rgba(255,255,255,.88);
   font-weight:700;
 }
+.card:hover{ transform: translateY(-4px); box-shadow: 0 20px 38px rgba(13,27,53,.12); }
 .newsList{
   display:grid;
   gap:12px;
@@ -438,6 +459,19 @@ a{ color:inherit; text-decoration:none; }
 .faqA{ margin:0; color: var(--muted); }
 .item b{ display:block; }
 .item span{ color: var(--muted); font-size: 13px; }
+
+.reveal{
+  opacity:0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform: translateY(0);
+}
+.btn.primary.pulse{
+  animation: pulseGlow 2.8s ease-in-out infinite;
+}
 
 .footer{
   border-top: 1px solid var(--line);
